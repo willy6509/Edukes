@@ -5,6 +5,9 @@ from collections import Counter
 from nltk.corpus import stopwords
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 
+nltk.download('stopwords')
+nltk.download('punkt')
+
 # --- Setup ---
 STOPWORDS_ID = set(stopwords.words('indonesian'))
 STEMMER = StemmerFactory().create_stemmer()
