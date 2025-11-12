@@ -3,8 +3,10 @@ import sys
 import os
 import time
 
-# Tambahkan src ke path agar modul bisa diimpor
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
+
+current_dir = os.path.dirname(__file__)
+project_root = os.path.abspath(os.path.join(current_dir, '..'))
+sys.path.append(project_root)
 
 # Import search logic dari modul yang sudah dibuat
 from src import search
