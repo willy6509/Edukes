@@ -1,0 +1,10 @@
+# Untuk antarmuka web interaktif
+streamlit
+
+# Untuk pemrosesan Bahasa Alami (NLP)
+nltk
+sastrawi
+
+# Untuk analisis & visualisasi di Notebook (Soal 2 & 5)
+matplotlib
+pandas
