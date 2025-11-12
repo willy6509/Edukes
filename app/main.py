@@ -2,17 +2,21 @@ import streamlit as st
 import sys
 import os
 import time
+import re  # Impor Regex untuk memecah kalimat
 
-
+# Ambil path ke direktori 'app/'
 current_dir = os.path.dirname(__file__)
+# Ambil path ke direktori root proyek (satu level di atas 'app/')
 project_root = os.path.abspath(os.path.join(current_dir, '..'))
+# Tambahkan root proyek ke sys.path
 sys.path.append(project_root)
+# -------------------------------------
 
 # Import search logic dari modul yang sudah dibuat
 from src import search
 from src import preprocess
-from src import vsm_ir  # <-- TAMBAHKAN BARIS INI
-from src import boolean_ir # <-- Tambahkan juga ini untuk jaga-jaga
+from src import vsm_ir
+from src import boolean_ir
 
 # --- 1. Konfigurasi Halaman & Styling Kustom ---
 
@@ -84,7 +88,6 @@ def load_data():
     docs_tokens = {doc_id: preprocess.tokenize(text) for doc_id, text in processed_docs.items()}
     
     N = len(docs_tokens)
-    # vsm_ir sekarang sudah terdefinisi berkat impor di atas
     tf = vsm_ir.calculate_tf(docs_tokens)
     df = vsm_ir.calculate_df(docs_tokens)
     idf = vsm_ir.calculate_idf(df, N)
@@ -95,25 +98,89 @@ def load_data():
     
     return docs_tokens, idf, tfidf_matrix
 
-# Kita memuat data VSM secara mandiri untuk UI
 UI_DOCS_TOKENS, UI_IDF, UI_TFIDF_MATRIX = load_data()
 
-# --- 3. Fungsi Utility ---
+# --- 3. Fungsi Utility (Termasuk Rangkuman Baru) ---
+
+@st.cache_data # Cache hasil pembacaan file mentah
+def get_raw_text(doc_id):
+    """Membaca teks mentah dari file berdasarkan doc_id."""
+    try:
+        # Asumsi 'data' adalah folder di level yang sama dengan 'app'
+        file_path = os.path.join(project_root, 'data/raw', doc_id)
+        with open(file_path, 'r', encoding='utf-8') as f:
+            return f.read()
+    except Exception as e:
+        print(f"Gagal membaca file {doc_id}: {e}")
+        return ""
+
+def split_into_sentences(text):
+    """Memecah teks menjadi kalimat menggunakan regex sederhana."""
+    # Memecah berdasarkan titik atau tanda tanya, diikuti spasi
+    sentences = re.split(r'(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', text)
+    # Filter kalimat pendek/kosong
+    return [s.strip() for s in sentences if len(s.strip()) > 15]
+
+def generate_extractive_summary(rankings, query_str, max_sentences=2):
+    """
+    Rangkuman Ekstraktif (Soal 5.3.b - Versi Baru).
+    Mencari kalimat terbaik dari top-k dokumen berdasarkan query.
+    """
+    try:
+        # 1. Dapatkan token query yang sudah diproses
+        processed_query_tokens = set(preprocess.preprocess_document(query_str))
+        if not processed_query_tokens:
+            return "Query tidak valid untuk rangkuman."
+
+        # 2. Kumpulkan kalimat dari 3 dokumen teratas
+        all_sentences = []
+        # Ambil top 3 doc_id dari hasil ranking
+        doc_ids_to_check = [doc_id for doc_id, score, explain in rankings[:3]]
+        
+        for doc_id in doc_ids_to_check:
+            raw_text = get_raw_text(doc_id)
+            all_sentences.extend(split_into_sentences(raw_text))
+
+        if not all_sentences:
+            return "Tidak ada konten yang dapat dirangkum dari hasil teratas."
+
+        # 3. Beri skor setiap kalimat berdasarkan overlap query
+        scored_sentences = []
+        for sentence in all_sentences:
+            # Preprocess kalimat untuk perbandingan yang adil
+            sentence_tokens = set(preprocess.preprocess_document(sentence))
+            # Skor = jumlah token query yang ada di kalimat
+            score = len(processed_query_tokens.intersection(sentence_tokens))
+            
+            if score > 0:
+                scored_sentences.append((score, sentence))
+
+        # 4. Urutkan berdasarkan skor dan ambil N kalimat teratas
+        if not scored_sentences:
+            # Jika tidak ada overlap, ambil cuplikan dari doc #1 (fallback)
+            return get_snippet(rankings[0][0], max_char=200)
+
+        scored_sentences.sort(key=lambda x: x[0], reverse=True)
+        
+        top_sentences = [s_text for s_score, s_text in scored_sentences[:max_sentences]]
+        
+        return " ".join(top_sentences)
+    
+    except Exception as e:
+        print(f"Error di generate_extractive_summary: {e}")
+        # Fallback jika terjadi error
+        return get_snippet(rankings[0][0], max_char=200)
+
 
 def get_snippet(doc_id, max_char=180):
-    """Mendapatkan snippet dari raw document."""
-    try:
-        raw_docs = preprocess.load_documents('data/raw')
-        text = raw_docs.get(doc_id, "Dokumen tidak ditemukan.")
-        return text.strip()[:max_char] + '...' if len(text.strip()) > max_char else text.strip()
-    except Exception:
-        return "Gagal memuat snippet."
+    """Mendapatkan snippet dari raw document (sekarang sebagai fallback)."""
+    raw_text = get_raw_text(doc_id)
+    return raw_text.strip()[:max_char] + '...' if len(raw_text.strip()) > max_char else raw_text.strip()
+
 
 def ui_search_vsm(query_str, k):
     """Fungsi VSM khusus untuk UI (memisahkan dari search.py)."""
-    
     query_processed_tokens = preprocess.preprocess_document(query_str)
-    # vsm_ir sekarang sudah terdefinisi
     query_vector = vsm_ir.vectorize_query(query_processed_tokens, UI_IDF, scheme='sublinear_tf')
     rankings = vsm_ir.rank_documents(UI_TFIDF_MATRIX, query_vector, k)
     
@@ -121,7 +188,7 @@ def ui_search_vsm(query_str, k):
     explained_rankings = []
     query_terms_set = set(query_processed_tokens)
     for doc_id, score in rankings:
-        doc_tokens_set = set(UI_DOCS_TOKENS[doc_id])
+        doc_tokens_set = set(UI_DOCS_TOKENS.get(doc_id, [])) # Gunakan .get() agar aman
         matching_terms = list(query_terms_set.intersection(doc_tokens_set))
         explained_rankings.append((doc_id, score, matching_terms[:5]))
         
@@ -161,10 +228,11 @@ if st.session_state.rankings is not None:
     st.markdown("---")
 
     if rankings:
-        # Rangkuman Cepat (Soal 5.3)
-        top_doc_id, top_score, top_explain = rankings[0]
-        top_snippet = get_snippet(top_doc_id, max_char=200)
-        st.info(f"**Rangkuman Cepat:** Hasil teratas ({top_doc_id}) menyarankan: *\"{top_snippet}\"*")
+        # --- Rangkuman Cepat (LOGIKA BARU) ---
+        with st.spinner("Membuat rangkuman cepat..."):
+            # Panggil fungsi rangkuman ekstraktif yang baru
+            summary_text = generate_extractive_summary(rankings, st.session_state.current_query, max_sentences=2)
+        st.info(f"**Rangkuman Cepat:** {summary_text}")
         
         st.subheader(f"📚 Hasil Pencarian Detil (Top {len(rankings)})")
         

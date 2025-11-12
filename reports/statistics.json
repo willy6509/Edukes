@@ -1,66 +1,78 @@
 {
     "doc_lengths": {
-        "doc01.txt": 48,
-        "doc02.txt": 46,
-        "doc03.txt": 53,
-        "doc04.txt": 49,
-        "doc05.txt": 41,
-        "doc06.txt": 52,
-        "doc07.txt": 50,
-        "doc08.txt": 44,
-        "doc09.txt": 43,
-        "doc10.txt": 45
+        "doc01.txt": 81,
+        "doc02.txt": 100,
+        "doc03.txt": 120,
+        "doc04.txt": 94,
+        "doc05.txt": 73,
+        "doc06.txt": 88,
+        "doc07.txt": 90,
+        "doc08.txt": 74,
+        "doc09.txt": 84,
+        "doc10.txt": 92
     },
     "top_10_tokens": {
         "doc01.txt": [
             [
                 "tangan",
+                8
+            ],
+            [
+                "gosok",
                 5
             ],
             [
-                "cuci",
+                "jari",
                 4
+            ],
+            [
+                "cuci",
+                3
+            ],
+            [
+                "kuman",
+                3
+            ],
+            [
+                "langkah",
+                3
+            ],
+            [
+                "cegah",
+                2
             ],
             [
                 "sabun",
                 2
             ],
             [
-                "kuman",
+                "makan",
                 2
             ],
             [
-                "bersih",
-                2
-            ],
-            [
-                "mudah",
-                1
-            ],
-            [
-                "efektif",
-                1
-            ],
-            [
-                "cegah",
-                1
-            ],
-            [
-                "sebar",
-                1
-            ],
-            [
-                "sakit",
+                "pandu",
                 1
             ]
         ],
         "doc02.txt": [
             [
                 "demam",
-                4
+                8
+            ],
+            [
+                "anak",
+                7
             ],
             [
                 "c",
+                4
+            ],
+            [
+                "suhu",
+                3
+            ],
+            [
+                "air",
                 3
             ],
             [
@@ -68,32 +80,20 @@
                 2
             ],
             [
-                "anak",
-                2
-            ],
-            [
-                "suhu",
-                2
-            ],
-            [
                 "tubuh",
                 2
             ],
             [
-                "air",
+                "ketiak",
                 2
             ],
             [
-                "turun",
+                "gejala",
                 2
             ],
             [
-                "atas",
-                1
-            ],
-            [
-                "rumah",
-                1
+                "nyaman",
+                2
             ]
         ],
         "doc03.txt": [
@@ -102,11 +102,27 @@
                 4
             ],
             [
-                "pilar",
-                2
+                "tidur",
+                4
             ],
             [
-                "utama",
+                "aktivitas",
+                3
+            ],
+            [
+                "fisik",
+                3
+            ],
+            [
+                "kualitas",
+                3
+            ],
+            [
+                "makan",
+                3
+            ],
+            [
+                "pilar",
                 2
             ],
             [
@@ -118,201 +134,25 @@
                 2
             ],
             [
-                "jaga",
-                2
-            ],
-            [
-                "makan",
-                2
-            ],
-            [
-                "imbang",
-                2
-            ],
-            [
-                "olahraga",
-                2
-            ],
-            [
-                "tidur",
+                "baik",
                 2
             ]
         ],
         "doc04.txt": [
             [
                 "gula",
-                4
-            ],
-            [
-                "risiko",
-                2
-            ],
-            [
-                "sehat",
-                2
-            ],
-            [
-                "konsumsi",
-                2
-            ],
-            [
-                "tambah",
-                2
+                6
             ],
             [
                 "jantung",
-                2
-            ],
-            [
-                "minum",
-                2
-            ],
-            [
-                "akibat",
-                1
-            ],
-            [
-                "bahaya",
-                1
-            ],
-            [
-                "tubuh",
-                1
-            ]
-        ],
-        "doc05.txt": [
-            [
-                "vaksinasi",
-                4
-            ],
-            [
-                "flu",
-                4
-            ],
-            [
-                "rutin",
-                2
-            ],
-            [
-                "virus",
-                2
-            ],
-            [
-                "tahun",
-                1
-            ],
-            [
-                "lindung",
-                1
-            ],
-            [
-                "komunitas",
-                1
-            ],
-            [
-                "sebar",
-                1
-            ],
-            [
-                "influenza",
-                1
-            ],
-            [
-                "mutasi",
-                1
-            ]
-        ],
-        "doc06.txt": [
-            [
-                "air",
-                5
-            ],
-            [
-                "putih",
-                4
-            ],
-            [
-                "dehidrasi",
                 3
             ],
             [
-                "tubuh",
-                2
-            ],
-            [
-                "minum",
-                2
-            ],
-            [
-                "bahaya",
-                1
-            ],
-            [
-                "manfaat",
-                1
-            ],
-            [
-                "jaga",
-                1
-            ],
-            [
-                "asupan",
-                1
-            ],
-            [
-                "manusia",
-                1
-            ]
-        ],
-        "doc07.txt": [
-            [
-                "sarap",
-                5
-            ],
-            [
-                "makan",
+                "darah",
                 3
             ],
             [
-                "sehat",
-                2
-            ],
-            [
-                "buah",
-                2
-            ],
-            [
-                "gula",
-                2
-            ],
-            [
-                "pandu",
-                1
-            ],
-            [
-                "praktis",
-                1
-            ],
-            [
-                "pilih",
-                1
-            ],
-            [
-                "pagi",
-                1
-            ],
-            [
-                "penting",
-                1
-            ]
-        ],
-        "doc08.txt": [
-            [
-                "gejala",
-                4
-            ],
-            [
-                "nali",
+                "dampak",
                 2
             ],
             [
@@ -320,122 +160,282 @@
                 2
             ],
             [
+                "tambah",
+                2
+            ],
+            [
+                "minum",
+                2
+            ],
+            [
+                "kemas",
+                2
+            ],
+            [
+                "makan",
+                2
+            ],
+            [
+                "insulin",
+                2
+            ]
+        ],
+        "doc05.txt": [
+            [
+                "flu",
+                6
+            ],
+            [
+                "sakit",
+                5
+            ],
+            [
+                "vaksinasi",
+                4
+            ],
+            [
+                "virus",
+                4
+            ],
+            [
+                "vaksin",
+                3
+            ],
+            [
+                "lindung",
+                2
+            ],
+            [
+                "influenza",
+                2
+            ],
+            [
+                "efektif",
+                2
+            ],
+            [
+                "anak",
+                2
+            ],
+            [
+                "tahun",
+                1
+            ]
+        ],
+        "doc06.txt": [
+            [
+                "air",
+                8
+            ],
+            [
+                "putih",
+                4
+            ],
+            [
+                "manfaat",
+                3
+            ],
+            [
+                "fungsi",
+                3
+            ],
+            [
+                "otak",
+                3
+            ],
+            [
+                "metabolisme",
+                3
+            ],
+            [
+                "tubuh",
+                3
+            ],
+            [
+                "kurang",
+                2
+            ],
+            [
+                "cair",
+                2
+            ],
+            [
+                "ringan",
+                2
+            ]
+        ],
+        "doc07.txt": [
+            [
+                "sarap",
+                8
+            ],
+            [
+                "sehat",
+                3
+            ],
+            [
+                "gula",
+                3
+            ],
+            [
+                "energi",
+                3
+            ],
+            [
+                "makan",
+                2
+            ],
+            [
+                "protein",
+                2
+            ],
+            [
+                "karbohidrat",
+                2
+            ],
+            [
+                "kompleks",
+                2
+            ],
+            [
+                "telur",
+                2
+            ],
+            [
+                "kacang",
+                2
+            ]
+        ],
+        "doc08.txt": [
+            [
+                "gejala",
+                6
+            ],
+            [
+                "tanda",
+                3
+            ],
+            [
+                "diabetes",
+                3
+            ],
+            [
+                "gula",
+                3
+            ],
+            [
+                "darah",
+                3
+            ],
+            [
                 "melitus",
                 2
             ],
             [
-                "tipe",
+                "buang",
                 2
             ],
             [
-                "gula",
+                "alami",
                 2
             ],
             [
-                "darah",
+                "infeksi",
                 2
             ],
             [
-                "sakit",
-                1
-            ],
-            [
-                "kondisi",
-                1
-            ],
-            [
-                "kronis",
+                "nali",
                 1
             ]
         ],
         "doc09.txt": [
             [
-                "olahraga",
+                "latih",
                 4
             ],
             [
-                "ringan",
-                2
+                "efektif",
+                3
             ],
             [
                 "rumah",
+                3
+            ],
+            [
+                "kuat",
+                3
+            ],
+            [
+                "olahraga",
                 2
             ],
             [
-                "latih",
+                "alat",
                 2
             ],
             [
-                "tips",
-                1
+                "milik",
+                2
             ],
             [
-                "ide",
-                1
+                "kardio",
+                2
             ],
             [
-                "efektif",
-                1
+                "fleksibilitas",
+                2
             ],
             [
-                "gym",
-                1
-            ],
-            [
-                "ruang",
-                1
-            ],
-            [
-                "jenis",
-                1
+                "laku",
+                2
             ]
         ],
         "doc10.txt": [
             [
                 "tidur",
-                6
-            ],
-            [
-                "istirahat",
-                2
-            ],
-            [
-                "malam",
-                2
-            ],
-            [
-                "sehat",
-                2
+                12
             ],
             [
                 "kualitas",
-                2
+                5
+            ],
+            [
+                "sleep",
+                3
+            ],
+            [
+                "hygiene",
+                3
+            ],
+            [
+                "hormon",
+                3
             ],
             [
                 "jam",
+                3
+            ],
+            [
+                "praktik",
                 2
             ],
             [
-                "hindar",
+                "otak",
                 2
             ],
             [
-                "produktivitas",
-                1
+                "rem",
+                2
             ],
             [
-                "fondasi",
-                1
-            ],
-            [
-                "mental",
-                1
+                "sebab",
+                2
             ]
         ]
     },
     "distribution": {
-        "mean": 47.1,
-        "min": 41,
-        "max": 53
+        "mean": 89.6,
+        "min": 73,
+        "max": 120
     }
 }

@@ -2,13 +2,17 @@ import sys
 import argparse
 import os
 
+SCRIPT_DIR = os.path.dirname(__file__)
+PROJECT_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, '..'))
+DEFAULT_DATA_PATH = os.path.join(PROJECT_ROOT, 'data', 'processed')
+
 # Menambahkan path agar bisa impor modul dari root
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 from src import preprocess, boolean_ir, vsm_ir
 
 # --- Setup Global (MODIFIKASI) ---
-def load_all_data(doc_dir='data/processed'):
+def load_all_data(doc_dir=DEFAULT_DATA_PATH):
     """Memuat semua indeks dan model yang diperlukan saat startup."""
     print("Memuat dokumen terproses...")
     processed_docs = preprocess.load_documents(doc_dir)
