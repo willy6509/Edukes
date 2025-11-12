@@ -1,6 +1,7 @@
 import re
 import os
 import json
+import nltk
 from collections import Counter
 from nltk.corpus import stopwords
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
