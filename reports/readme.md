@@ -1,6 +1,6 @@
 # Proyek UTS STKI: Mini Search Engine EduKesehatan
-**Nama:** (Nama Anda)
-**NIM:** (NIM Anda)
+**Nama:** Wildanu Rafif Albaihaqi
+**NIM:** A11.2023.14978
 **Kelas:** A11.4703
 
 Proyek ini adalah implementasi *mini search engine* untuk artikel kesehatan dasar, dibangun untuk memenuhi Ujian Tengah Semester (UTS) Mata Kuliah Sistem Temu Kembali Informasi.
@@ -8,7 +8,7 @@ Proyek ini adalah implementasi *mini search engine* untuk artikel kesehatan dasa
 ## 📁 Struktur Folder
 
 ```
-stki-uts-<nim>-<nama>/
+stki-uts-A11.2023.14978-WildanuRafifAlbaihaqi/
 ├── data/
 │   ├── raw/
 │   │   └── (10 .txt korpus)
@@ -23,7 +23,7 @@ stki-uts-<nim>-<nama>/
 ├── app/
 │   └── main.py            # (Soal 05) Antarmuka web Streamlit
 ├── notebooks/
-│   └── UTS_STKI_<nim>.ipynb # (Soal 2,3,4,5) Analisis & Laporan Uji
+│   └── UTS_STKI_14978.ipynb # (Soal 2,3,4,5) Analisis & Laporan Uji
 ├── reports/
 │   ├── laporan.pdf        # (Wajib) Laporan analisis proyek
 │   └── statistics.json    # (Otomatis) Output Uji Soal 2
@@ -40,14 +40,7 @@ Pastikan Anda memiliki Python 3.8+ dan `pip`.
     ```bash
     pip install -r requirements.txt
     ```
-
-2.  **Unduh *Resource* NLTK** (hanya sekali):
-    Jalankan Python dan ketik:
-    ```python
-    import nltk
-    nltk.download('stopwords')
-    ```
-
+    
 ### B. Tahap 1: Preprocessing & Uji Soal 2
 Jalankan *script* ini untuk membersihkan korpus di `data/raw/` dan menyimpan hasilnya di `data/processed/`. Perintah ini juga akan menjalankan **Uji Soal 2** (statistik token & panjang dokumen) dan menyimpan hasilnya di `reports/statistics.json`.
 
